@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Pagamento — Simulação</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="container" style="max-width:640px;margin:2rem auto">
+    <h1>Pagamento — Simulação</h1>
+    <p>Esta é uma simulação de fluxo de pagamento. Confirme para concluir a doação.</p>
+    <div id="pending-info" class="section-card">Carregando...</div>
+    <div style="margin-top:1rem">
+      <button id="confirm-pay">Confirmar pagamento</button>
+      <button id="cancel-pay">Cancelar</button>
+    </div>
+  </main>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const infoDiv = document.getElementById('pending-info');
+      const pendingRaw = sessionStorage.getItem('mq_pending_donation');
+      if(!pendingRaw){ infoDiv.textContent = 'Nenhuma doação pendente. Voltando...'; setTimeout(()=> location.href='doador.html',1500); return; }
+      const p = JSON.parse(pendingRaw);
+      infoDiv.innerHTML = `<strong>${p.name}</strong><div>Valor: R$ ${Number(p.amount).toFixed(2)}</div><div>Projeto: ${p.projectId || '—'}</div>`;
+      document.getElementById('confirm-pay').addEventListener('click', ()=>{
+        // salvar em localStorage
+        const donations = JSON.parse(localStorage.getItem('mq_donations')||'[]');
+        donations.unshift(p);
+        localStorage.setItem('mq_donations', JSON.stringify(donations));
+        // limpar pending e redirecionar para thankyou
+        sessionStorage.removeItem('mq_pending_donation');
+        // passar id da doação via query
+        location.href = 'thankyou.html?donationId=' + encodeURIComponent(p.id);
+      });
+      document.getElementById('cancel-pay').addEventListener('click', ()=>{
+        sessionStorage.removeItem('mq_pending_donation');
+        location.href='doador.html';
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin — Mãos que Acolhem</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#admin-main">Pular para o conteúdo</a>
+  <header role="banner">
+    <div class="container header-inner">
+      <button class="hamburger" data-target="#admin-nav" aria-label="Abrir menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+          <rect y="4" width="24" height="2" rx="1" fill="currentColor"></rect>
+          <rect y="11" width="24" height="2" rx="1" fill="currentColor"></rect>
+          <rect y="18" width="24" height="2" rx="1" fill="currentColor"></rect>
+        </svg>
+        <span class="sr-only">Abrir menu</span>
+      </button>
+      <a href="index.html" aria-label="Voltar ao site">
+        <img src="imagens/maosqueacolhem.png" alt="Logo" style="height:48px">
+      </a>
+      <nav id="admin-nav" class="nav-collapsed" role="navigation" aria-label="Menu admin">
+        <div class="nav-list">
+          <a href="index.html">Início</a>
+          <a href="admin.html" aria-current="page">Admin</a>
+          <button type="button" id="logout-btn" onclick="logout()" style="background:transparent;border:0;color:#000;cursor:pointer">Sair</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <main id="admin-main" class="container">
+    <h1>Área do Administrador</h1>
+    <p>Protótipo simples: os dados são armazenados localmente no navegador (localStorage).</p>
+
+    <section id="institucional" class="section-card">
+      <h2>Informações Institucionais</h2>
+      <textarea id="info-text" rows="6" style="width:100%"></textarea>
+      <div style="margin-top:0.5rem">
+        <button id="save-info">Salvar informações</button>
+      </div>
+    </section>
+
+    <section id="projetos" class="section-card">
+      <h2>Projetos</h2>
+      <form id="project-form">
+        <input type="hidden" id="project-id">
+        <label>Título<br><input id="project-title" required></label><br>
+        <label>Descrição<br><textarea id="project-desc" rows="3"></textarea></label><br>
+        <label>Meta (R$)<br><input id="project-target" type="number" min="0" step="0.01"></label><br>
+        <button type="submit">Salvar projeto</button>
+        <button type="button" id="project-clear">Limpar</button>
+      </form>
+      <div id="projects-list" style="margin-top:1rem"></div>
+    </section>
+
+    <section id="voluntarios" class="section-card">
+      <h2>Voluntários</h2>
+      <form id="vol-form">
+        <input type="hidden" id="vol-id">
+        <label>Nome<br><input id="vol-name" required></label><br>
+        <label>Contato (email ou telefone)<br><input id="vol-contact"></label><br>
+        <button type="submit">Salvar voluntário</button>
+        <button type="button" id="vol-clear">Limpar</button>
+      </form>
+      <div id="vol-list" style="margin-top:1rem"></div>
+    </section>
+
+    <section id="expenses" class="section-card">
+      <h2>Aplicação de recursos (Despesas)</h2>
+      <form id="expense-form">
+        <label>Projeto (opcional)<br>
+          <select id="expense-project"><option value="">-- nenhum --</option></select>
+        </label><br>
+        <label>Descrição<br><input id="expense-desc"></label><br>
+        <label>Valor (R$)<br><input id="expense-amount" type="number" step="0.01" min="0"></label><br>
+        <button type="submit">Registrar despesa</button>
+      </form>
+      <div id="expenses-list" style="margin-top:1rem"></div>
+    </section>
+
+    <section id="doacoes" class="section-card">
+      <h2>Doações</h2>
+      <form id="donation-form">
+        <label>Nome do doador<br><input id="donor-name"></label><br>
+        <label>Valor (R$)<br><input id="donation-amount" type="number" min="0" step="0.01"></label><br>
+        <label>Para projeto (opcional)<br><select id="donation-project"><option value="">-- nenhum --</option></select></label><br>
+        <button type="submit">Registrar doação</button>
+      </form>
+      <div id="donations-list" style="margin-top:1rem"></div>
+    </section>
+
+    <section id="metricas" class="section-card">
+      <h2>Métricas</h2>
+      <ul>
+        <li id="metric-projects">Projetos: 0</li>
+        <li id="metric-vols">Voluntários: 0</li>
+        <li id="metric-donations">Total de doações: R$ 0,00</li>
+        <li id="metric-expenses">Total de despesas: R$ 0,00</li>
+      </ul>
+    </section>
+
+    <section id="backup" class="section-card">
+      <h2>Backup / Restaurar dados</h2>
+      <p>Exporte os dados atuais para um arquivo JSON ou importe um arquivo de backup para restaurar.</p>
+      <div style="display:flex;gap:0.5rem;align-items:center">
+        <button id="export-btn">Exportar dados (JSON)</button>
+        <label for="import-file" style="margin-left:0.5rem">
+          <input id="import-file" type="file" accept="application/json" style="display:none">
+          <button id="import-btn" type="button">Importar dados (JSON)</button>
+        </label>
+      </div>
+      <p id="backup-msg" style="margin-top:0.5rem;color:#155724;display:none"></p>
+    </section>
+
+  </main>
+  <footer class="footer">
+    <div class="container">&copy; 2025 Mãos que Acolhem — Área administrativa (protótipo)</div>
+  </footer>
+  <script src="auth.js" defer></script>
+  <script src="menu.js" defer></script>
+    <script src="admin.js" defer></script>
+    <script src="form-validate.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Obrigado — Mãos que Acolhem</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="container" style="max-width:640px;margin:2rem auto">
+    <h1>Obrigado pela sua doação!</h1>
+    <div id="receipt" class="section-card">Carregando recibo...</div>
+    <p><a href="doador.html">Voltar para página de doador</a> | <a href="index.html">Ir para início</a></p>
+  </main>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const params = new URLSearchParams(location.search);
+      const id = params.get('donationId');
+      const donations = JSON.parse(localStorage.getItem('mq_donations')||'[]');
+      const d = donations.find(x=>x.id===id) || donations[0];
+      const el = document.getElementById('receipt');
+      if(!d){ el.innerHTML = '<p>Não foi possível localizar a doação.</p>'; return; }
+      el.innerHTML = `<strong>${d.name}</strong><div>Valor: ${Number(d.amount).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}</div><div>Projeto: ${d.projectId || '—'}</div><div>Data: ${new Date(d.when).toLocaleString()}</div>`;
+    });
+  </script>
+</body>
+</html>

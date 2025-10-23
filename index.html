@@ -4,72 +4,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mãos que Acolhem</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>HOME</h1>
-        <nav>
-            <ul>
-                <li><a href ="index.html">Inicio</a></li>
-                <li><a href ="projeto.html">Projeto</a></li>
-                <li><a href ="cadastro.html">Cadastro</a></li>
-                <li><a href="doador.html">Seja um Doador</a></li>
-                <li><a href="perfil.html">Perfil</a></li>
-            </ul>
-        </nav>
+        <div class="container header-inner">
+            <button class="hamburger" data-target="#main-nav" aria-label="Abrir menu" aria-expanded="false">
+                <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+                    <rect y="4" width="24" height="2" rx="1" fill="currentColor"></rect>
+                    <rect y="11" width="24" height="2" rx="1" fill="currentColor"></rect>
+                    <rect y="18" width="24" height="2" rx="1" fill="currentColor"></rect>
+                </svg>
+                <span class="sr-only">Abrir menu</span>
+            </button>
+            <!-- logo -->
+            <a href="index.html" class="logo-link" aria-label="Ir para a página inicial">
+                <img src="imagens/maosqueacolhem.png" alt="Logotipo Mãos que Acolhem" class="logo">
+            </a>
+            <h1 class="site-title">Mãos que Acolhem</h1>
+            <nav id="main-nav" class="nav-collapsed" role="navigation" aria-label="Menu principal">
+                <div class="nav-list">
+                    <a href="index.html">Início</a>
+                    <a href="projeto.html">Projeto</a>
+                    <a href="cadastro.html">Cadastro</a>
+                    <a href="doador.html">Seja um Doador</a>
+                    <a href="perfil.html">Perfil</a>
+                    <a href="admin.html">Admin</a>
+                </div>
+            </nav>
+        </div>
     </header>
-    <main>
-        <section>
-            <h1>Bem-Vindo à nossa ONG Mãos que Acolhem</h1>
-            <p>Estamos aqui para fazer a diferença na vida de pessoas e famílias necessitadas. Junte-se a nós nessa missão de amor e solidariedade!</p>
-            <aside>
-            <img src="imagens/maosqueacolhem.png" alt="Mãos que Acolhem" width="500" height="200">
+
+    <main class="container main-content">
+        <section class="hero">
+            <aside class="hero-media">
+                <img src="imagens/maosqueacolhem.png" alt="Mãos que Acolhem" class="hero-img responsive">
             </aside>
-        </section>
-        <section>
-            <article>
-            <h2>Quem somos?</h2>
-            
-            <p>Somos uma equipe dedicada ao acolhimento de famílias necessitadas atuando mediante a ajuda de doadores e voluntários.</p>
-            </article>
-        </section>
-
-        <section>
-            <article><h3>Nossa Missão</h3>
-            <p>Nossa missão é auxiliar pessoas e famílias de baixa renda, moradores de rua, pessoas com baixo nível de escolaridade.</p>
-        </article>
-        </section>
-
-        <section>
-            <article>
-            <h3>O que fazemos?</h3>
-            <p>Oferecemos suporte emocional, social e material para ajudar essas pessoas a reconstruírem suas vidas e alcançarem um futuro melhor.</p>
+            <article class="hero-text">
+                <h2>Quem somos?</h2>
+                <p>Somos uma equipe dedicada ao acolhimento de famílias necessitadas atuando mediante a ajuda de doadores e voluntários.</p>
+                <p><a href="cadastro.html">Faça seu cadastro</a> para receber atualizações sobre nossos projetos e oportunidades de voluntariado.</p>
             </article>
         </section>
 
         <section>
             <article>
-            <h3>Como você pode ajudar?</h3>
-            <p>Você pode contribuir de várias maneiras, seja como voluntário, doador ou simplesmente compartilhando nossa causa com seus amigos e familiares.</p>
-            <p>Você pode fazer o seu <a href="cadastro.html">Cadastro</a> em nosso site para receber nossos projetos e postagens</p>
-            <p>Seja um <a href="doador.html">Doador</a> e ajude-nos a continuar nosso trabalho.</p>
-            </article>
-        </section>
-        <section>
-            <article>
-            <h3>Contato</h3>
-            <address>
-                <p>Endereço: Rua Beija flor, 124 - Bairro: Bela Vista - São Paulo/SP</p>
-                <p>telefone: (11) 91234-5678</p>
-                <p>Email: maosunidascontato@maosqueacolhem.com.br</p>
-            </address>
+                <h3>Nossa Missão</h3>
+                <p>Nossa missão é auxiliar pessoas e famílias de baixa renda, moradores de rua e pessoas com baixo nível de escolaridade.</p>
             </article>
         </section>
 
-        
+        <section>
+            <article>
+                <h3>O que fazemos?</h3>
+                <p>Oferecemos suporte emocional, social e material para ajudar essas pessoas a reconstruírem suas vidas e alcançarem um futuro melhor.</p>
+            </article>
+        </section>
+
+        <section>
+            <article>
+                <h3>Como você pode ajudar?</h3>
+                <p>Você pode contribuir de várias maneiras: como voluntário, doador ou compartilhando nossa causa com amigos e familiares.</p>
+                <p>Seja um <a href="doador.html">Doador</a> e ajude-nos a continuar nosso trabalho.</p>
+            </article>
+        </section>
+
+        <section>
+            <article>
+                <h3>Contato</h3>
+                <address>
+                    <p>Endereço: Rua Beija-flor, 124 - Bela Vista - São Paulo/SP</p>
+                    <p>Telefone: (11) 91234-5678</p>
+                    <p>Email: maosunidascontato@maosqueacolhem.com.br</p>
+                </address>
+            </article>
+        </section>
     </main>
+
     <footer>
         <p>&copy; 2025 Mãos que Acolhem</p>
     </footer>
 </body>
-</html> 
+</html>

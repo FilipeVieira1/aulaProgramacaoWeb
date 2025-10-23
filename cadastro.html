@@ -4,18 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro | ONG Mãos que Acolhem</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <nav>
-            <ul>
-                <li><a href ="index.html">Inicio</a></li>
-                <li><a href ="projeto.html">Projeto</a></li>
-                <li><a href ="cadastro.html">Cadastro</a></li>
-                <li><a href="doador.html">Seja um Doador</a></li>
-                <li><a href="perfil.html">Perfil</a></li>
-            </ul>
-        </nav>
+        <div class="container header-inner">
+            <button class="hamburger" data-target="#main-nav" aria-label="Abrir menu" aria-expanded="false">
+                <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+                    <rect y="4" width="24" height="2" rx="1" fill="currentColor"></rect>
+                    <rect y="11" width="24" height="2" rx="1" fill="currentColor"></rect>
+                    <rect y="18" width="24" height="2" rx="1" fill="currentColor"></rect>
+                </svg>
+                <span class="sr-only">Abrir menu</span>
+            </button>
+            <h1 class="site-title">Mãos que Acolhem</h1>
+            <nav id="main-nav" class="nav-collapsed" role="navigation" aria-label="Menu principal">
+                <div class="nav-list">
+                    <a href ="index.html">Inicio</a>
+                    <a href ="projeto.html">Projeto</a>
+                    <a href ="cadastro.html">Cadastro</a>
+                    <a href="doador.html">Seja um Doador</a>
+                    <a href="perfil.html">Perfil</a>
+                </div>
+            </nav>
+        </div>
     </header>
     <main>
        <article>
@@ -23,7 +35,7 @@
         <h2>Seja um Voluntário e faça a diferença!</h2>
         <p>Junte-se a nós na missão de ajudar pessoas e famílias necessitadas. Como voluntário, você terá a oportunidade de contribuir com seu tempo e habilidades para transformar vidas e fortalecer nossa comunidade. Venha fazer parte dessa jornada de solidariedade e amor!</p>
         <p>Fazendo seu cadastro você fica por dentro de todos nossos <a href = "projeto.html"> projetos</a>, tendo a oportunidade de nos ajudar com sua força!</p>
-        <img src="imagens/cadastro.webp" alt="Cadastro" width="500" height="300">
+    <img src="imagens/cadastro.webp" alt="Cadastro" class="responsive">
         <hr>
        </article>
          <section> 
@@ -35,7 +47,7 @@
                 <label for="nome">Nome</label>
                 <input type="text" id="nome" name="nome" required>
 
-                <laebl for="nasimento">Data de Nascimento</laebl>
+                <label for="nascimento">Data de Nascimento</label>
                 <input type="date" id="nascimento" name="nascimento" required>
 
                 <label for="email">Email</label>
@@ -49,6 +61,24 @@
         </form>
         </section>
         
+        <section id="volunteer-portal" class="section-card">
+            <h2>Portal do Voluntário</h2>
+            <p>Descubra oportunidades, candidate-se e acompanhe seu histórico.</p>
+            <div id="opportunities-list"></div>
+            <h3>Seu histórico de candidaturas</h3>
+            <div id="applications-list">Nenhuma candidatura ainda.</div>
+
+            <h3>Compartilhe sua experiência</h3>
+            <form id="experience-form">
+                <label for="exp-name">Seu nome</label>
+                <input id="exp-name" type="text" required>
+                <label for="exp-text">Relato</label>
+                <textarea id="exp-text" rows="4" required></textarea>
+                <button type="submit">Publicar relato</button>
+            </form>
+            <div id="experiences-list" style="margin-top:1rem"></div>
+        </section>
+        
         <article>
          <h3>Após o cadastro, você receberá atualizações sobre nossos projetos e oportunidades de voluntariado. Junte-se a nós e faça a diferença!</h3>
         </article>
@@ -57,5 +87,7 @@
         <p>&copy; 2025 Mãos que Acolhem</p>
     </footer>
 
+    <script src="volunteer.js" defer></script>
+    <script src="form-validate.js" defer></script>
 </body>
 </html>

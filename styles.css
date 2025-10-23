@@ -1,0 +1,127 @@
+/* styles.css - Mobile-first, responsividade e acessibilidade básica */
+:root{
+  --primary: #2b6cb0;
+  --accent: #f6ad55;
+  --bg: #ffffff;
+  --text: #222222;
+  --muted: #6b7280;
+  /* cores personalizadas seguindo sua especificação */
+  --primary-1: #f15b5b; /* coral claro */
+  --primary-2: #ff6b6b; /* vermelho médio */
+  --primary-3: #e74c3c; /* vermelho intenso */
+  --accent-dark: #b22222; /* destaque/botões */
+  --accent-darker: #8b0000; /* hover */
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  color:var(--text);
+  background:var(--bg);
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  line-height: 1.6;
+}
+a{color:var(--primary)}
+.container{max-width:1100px;margin:0 auto;padding:1rem}
+header{background:var(--primary);color:#fff;padding:0.6rem 0}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.site-branding img{height:48px;width:auto;display:block}
+/* cabeçalho fixo */
+header{background:var(--primary-2);color:#000;padding:0.6rem 0;position:fixed;left:0;right:0;top:0;z-index:1000}
+header .site-title{font-weight:700;color:#000;margin:0;text-align:center}
+
+/* Logo */
+.logo{height:40px;width:auto;display:block}
+.logo-link{display:inline-flex;align-items:center;gap:0.5rem;text-decoration:none}
+
+/* Compensa header fixo para que o conteúdo não fique escondido */
+.main-content{padding-top:5rem}
+
+/* botão hambúrguer */
+.hamburger{background:transparent;border:0;color:#000;font-size:1.25rem;padding:0.4rem;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
+.hamburger:focus{outline:3px solid var(--accent-dark);outline-offset:2px}
+nav ul{list-style:none;padding:0;margin:0;display:flex;gap:0.5rem;flex-wrap:wrap}
+nav a, nav button{color:#fff;text-decoration:none;padding:0.4rem 0.6rem;border-radius:4px;display:inline-block}
+nav a:focus,nav a:hover, nav button:focus, nav button:hover{background:rgba(255,255,255,0.12);outline:none}
+.skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
+.skip-link:focus{left:8px;top:8px;width:auto;height:auto;padding:8px;background:#000;color:#fff;border-radius:4px;z-index:1000}
+main{padding:1rem}
+.hero{background:linear-gradient(180deg, rgba(43,108,176,0.08), transparent);padding:1rem;border-radius:6px}
+img.responsive{max-width:100%;height:auto;display:block}
+.hero{display:flex;flex-direction:column;gap:1rem;align-items:stretch}
+.hero-media{flex:1}
+.hero-text{flex:1}
+.hero-img{max-width:480px;margin:0 auto;border-radius:6px}
+.grid{display:grid;gap:1rem}
+.section-card{background:#fff;border:1px solid #e6e6e6;padding:0.75rem;border-radius:6px}
+.footer{background:#f3f4f6;padding:1rem;text-align:center;font-size:0.95rem;color:var(--muted);margin-top:1.5rem}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* Forms */
+input,textarea,select,button{font:inherit}
+input,textarea,select{padding:0.5rem;border:1px solid #d1d5db;border-radius:4px;width:100%}
+button{background:var(--primary);color:#fff;border:none;padding:0.5rem 0.8rem;border-radius:6px;cursor:pointer}
+button[disabled]{opacity:0.6;cursor:not-allowed}
+
+/* Mobile-first layout */
+.container{padding:1rem}
+.grid{grid-template-columns:1fr}
+
+/* Breakpoints */
+@media(min-width:640px){
+  .container{padding:1.25rem}
+}
+@media(min-width:900px){
+  .grid{grid-template-columns:2fr 1fr}
+  .header-inner{gap:2rem}
+  .nav-collapsed{display:flex !important;flex-direction:row}
+  .nav-expanded{display:flex !important;position:static;flex-direction:row;background:transparent;padding:0;border-radius:0}
+  .hamburger{display:none}
+  .hero{flex-direction:row;align-items:center}
+  /* nav-list always visible on wide screens */
+  nav .nav-list{display:flex;flex-direction:row;gap:0.5rem}
+}
+
+/* Navigation responsive: collapse to column on small screens */
+@media(max-width:639px){
+  nav ul{flex-direction:column;gap:0.25rem}
+  /* hide inline nav-list by default on small screens; menu.js toggles nav-expanded */
+  nav .nav-list{display:none}
+  .nav-expanded .nav-list{display:flex;flex-direction:column;gap:0.5rem;padding:0.5rem;background:rgba(0,0,0,0.03);border-radius:6px;margin-top:0.5rem}
+}
+
+/* Utility */
+.text-muted{color:var(--muted)}
+.small{font-size:0.9rem}
+
+/* Simple responsive table for reports */
+.table{width:100%;border-collapse:collapse}
+.table th,.table td{border:1px solid #eee;padding:0.5rem;text-align:left}
+
+/* focus styles for accessibility */
+:focus{outline:3px solid coral;outline-offset:2px}
+:focus{outline:3px solid var(--accent-dark);outline-offset:2px}
+
+/* títulos */
+h1,h2,h3{color:var(--text);font-weight:700;margin-bottom:0.5rem}
+h1{font-size:1.6rem}
+@media(min-width:900px){h1{font-size:2rem}}
+
+/* botões */
+button{background:var(--accent-dark);color:#fff;border:none;padding:0.5rem 0.8rem;border-radius:6px;cursor:pointer}
+button:hover{background:var(--accent-darker)}
+
+/* SVG inside hamburger should follow text color and have predictable size */
+.hamburger svg{width:24px;height:24px;display:block;color:#000}
+.nav-collapsed .hamburger svg, .nav-expanded .hamburger svg{color:#000}
+@media(min-width:900px){
+  /* On desktop header background is light, ensure icon color is readable */
+  .hamburger svg{color:#000}
+}
+
+/* parágrafos */
+p{margin-bottom:1rem}
+.justify{text-align:justify}
+.center{text-align:center}
