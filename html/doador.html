@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Doações | Mãos que Acolhem</title>
+    <link rel="stylesheet" href="../css/styles.css">
+  </head>
+  <body>
+    <header>
+      <div class="container header-inner">
+        <button class="hamburger" data-target="#main-nav" aria-label="Abrir menu" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+            <rect y="4" width="24" height="2" rx="1" fill="currentColor"></rect>
+            <rect y="11" width="24" height="2" rx="1" fill="currentColor"></rect>
+            <rect y="18" width="24" height="2" rx="1" fill="currentColor"></rect>
+          </svg>
+        </button>
+        <h1 class="site-title">Mãos que Acolhem</h1>
+        <nav id="main-nav" class="nav-collapsed" role="navigation" aria-label="Menu principal">
+          <div class="nav-list">
+            <a href="index.html">Inicio</a>
+            <a href="projeto.html">Projeto</a>
+            <a href="cadastro.html">Cadastro</a>
+            <a href="doador.html">Seja um Doador</a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <h1>Seja um Doador</h1>
+
+      <section>
+        <h2>Escolha um projeto para apoiar</h2>
+        <form id="donation-form" class="card" novalidate>
+          <label for="project-select">Projeto</label>
+          <select id="project-select" name="project"></select>
+
+          <label for="amount">Valor (R$)</label>
+          <input id="amount" name="amount" type="number" min="1" step="0.01" required>
+
+          <label for="donor-name">Nome</label>
+          <input id="donor-name" name="name" type="text" required>
+
+          <label for="donor-email">E-mail</label>
+          <input id="donor-email" name="email" type="email">
+
+          <button type="submit">Doar</button>
+        </form>
+      </section>
+
+      <section>
+        <h2>Histórico de doações</h2>
+        <div id="donation-history"></div>
+      </section>
+
+    </main>
+
+    <footer>
+      <p>&copy; 2025 Mãos que Acolhem</p>
+    </footer>
+
+    <script src="../js/mq-utils.js" defer></script>
+    <script src="../js/menu.js" defer></script>
+    <script src="../js/donor.js" defer></script>
+  </body>
+</html>

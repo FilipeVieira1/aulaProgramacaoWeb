@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Administração | Mãos que Acolhem</title>
+    <link rel="stylesheet" href="../css/styles.css">
+  </head>
+  <body>
+    <header>
+      <div class="container header-inner">
+        <button class="hamburger" data-target="#main-nav" aria-label="Abrir menu" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+            <rect y="4" width="24" height="2" rx="1" fill="currentColor"></rect>
+            <rect y="11" width="24" height="2" rx="1" fill="currentColor"></rect>
+            <rect y="18" width="24" height="2" rx="1" fill="currentColor"></rect>
+          </svg>
+        </button>
+        <h1 class="site-title">Mãos que Acolhem — Admin</h1>
+        <nav id="main-nav" class="nav-collapsed" role="navigation" aria-label="Menu principal">
+          <div class="nav-list">
+            <a href="index.html">Inicio</a>
+            <a href="projeto.html">Projeto</a>
+            <a href="cadastro.html">Cadastro</a>
+            <a href="doador.html">Seja um Doador</a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <h1>Área administrativa</h1>
+
+      <section>
+        <h2>Gerenciar projetos</h2>
+        <div id="projects-list"></div>
+      </section>
+
+      <section>
+        <h2>Doações</h2>
+        <div id="donations-list"></div>
+      </section>
+
+      <section>
+        <h2>Despesas</h2>
+        <div id="expenses-list"></div>
+      </section>
+
+      <section>
+        <h2>Exportar / Importar dados</h2>
+        <button id="export-btn">Exportar JSON</button>
+        <input type="file" id="import-file" accept="application/json">
+      </section>
+
+    </main>
+
+    <footer>
+      <p>&copy; 2025 Mãos que Acolhem</p>
+    </footer>
+
+    <script src="../js/mq-utils.js" defer></script>
+    <script src="../js/menu.js" defer></script>
+    <script src="../js/admin.js" defer></script>
+  </body>
+</html>

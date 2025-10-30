@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Login Admin | Mãos que Acolhem</title>
+    <link rel="stylesheet" href="../css/styles.css">
+  </head>
+  <body>
+    <main>
+      <h1>Login Administrativo</h1>
+      <form id="admin-login-form" class="card" novalidate>
+        <label for="admin-user">Usuário</label>
+        <input id="admin-user" name="user" type="text" required>
+
+        <label for="admin-pass">Senha</label>
+        <input id="admin-pass" name="password" type="password" required>
+
+        <button type="submit">Entrar</button>
+      </form>
+    </main>
+
+    <script src="../js/mq-utils.js" defer></script>
+    <script src="../js/auth.js" defer></script>
+  </body>
+</html>

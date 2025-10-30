@@ -96,6 +96,12 @@ button[disabled]{opacity:0.6;cursor:not-allowed}
 .text-muted{color:var(--muted)}
 .small{font-size:0.9rem}
 
+/* mensagens de formulário */
+.form-error{color:#b22222;background:rgba(178,34,34,0.04);padding:0.35rem;margin-top:0.25rem;border-radius:4px;font-size:0.95rem}
+.form-warning{color:#9a6b00;background:rgba(250,204,21,0.06);padding:0.35rem;margin-top:0.25rem;border-radius:4px;font-size:0.95rem}
+.invalid{border-color:#b22222}
+.warning{border-color:#9a6b00}
+
 /* Simple responsive table for reports */
 .table{width:100%;border-collapse:collapse}
 .table th,.table td{border:1px solid #eee;padding:0.5rem;text-align:left}
