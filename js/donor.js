@@ -33,19 +33,39 @@
 
   function populateProjectSelect(){ const sel = $('donor-project'); if(!sel) return; sel.innerHTML = '<option value="">-- nenhum --</option>'; read(KEY_PROJECTS).forEach(p=>{ const o=document.createElement('option'); o.value=p.id; o.textContent=p.title; sel.appendChild(o); }); }
 
-  function handleDonate(e){
+  function handleDonate(e) {
     e.preventDefault();
-  const name = $('donor-name').value.trim();
-  const email = $('donor-email').value.trim();
-  const amount = parseFloat($('donor-amount').value) || 0;
-  const projectId = $('donor-project').value || '';
-    if(!name || amount<=0){ alert('Nome e valor são obrigatórios.'); return; }
-    // criar doação pendente em sessionStorage e redirecionar para simulação de pagamento
-    const pending = { id: Date.now().toString(), name, email, amount, projectId, when: Date.now() };
-    sessionStorage.setItem('mq_pending_donation', JSON.stringify(pending));
-    // redirecionar para página de pagamento simulado
+    const name = $('donor-name').value.trim();
+    const email = $('donor-email').value.trim();
+    const amount = parseFloat($('donor-amount').value) || 0;
+    const projectId = $('donor-project').value || '';
+
+    if (!name || amount <= 0) {
+        alert('Nome e valor são obrigatórios.');
+        return;
+    }
+
+    // Criar doação com dados completos
+    const donation = {
+        id: Date.now().toString(),
+        name,
+        email,
+        amount,
+        projectId,
+        when: Date.now()
+    };
+
+    // Salvar a doação pendente para processamento após o pagamento
+    sessionStorage.setItem('mq_pending_donation', JSON.stringify(donation));
+
+    // Salvar também no localStorage para garantir que apareça na área administrativa
+    const donations = read(KEY_DONATIONS);
+    donations.unshift(donation); // Adiciona no início da lista
+    write(KEY_DONATIONS, donations);
+
+    // Redirecionar para página de pagamento simulado
     window.location.href = 'payment-sim.html';
-  }
+}
 
   function renderDonorHistory(){ const container = $('donor-history-list'); if(!container) return; const donations = read(KEY_DONATIONS); if(donations.length===0){ container.innerHTML='<p>Nenhuma doação registrada.</p>'; return; } container.innerHTML=''; donations.forEach(d=>{ const div=document.createElement('div'); div.className='section-card'; div.innerHTML=`<strong>${escapeHtml(d.name)}</strong> — ${escapeHtml(d.email||'')} — ${Number(d.amount).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})} <div style="font-size:0.9rem;color:#666">${new Date(d.when).toLocaleString()}</div>`; container.appendChild(div); }); }
 

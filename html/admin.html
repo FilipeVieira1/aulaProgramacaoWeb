@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Administração | Mãos que Acolhem</title>
     <link rel="stylesheet" href="../css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
   </head>
   <body>
     <header>
@@ -19,7 +22,7 @@
         <h1 class="site-title">Mãos que Acolhem — Admin</h1>
         <nav id="main-nav" class="nav-collapsed" role="navigation" aria-label="Menu principal">
           <div class="nav-list">
-            <a href="index.html">Inicio</a>
+            <a href="../index.html">Inicio</a>
             <a href="projeto.html">Projeto</a>
             <a href="cadastro.html">Cadastro</a>
             <a href="doador.html">Seja um Doador</a>
@@ -28,28 +31,74 @@
       </div>
     </header>
 
-    <main>
+    <main class="container main-content">
       <h1>Área administrativa</h1>
 
-      <section>
-        <h2>Gerenciar projetos</h2>
-        <div id="projects-list"></div>
+      <section class="section-card">
+        <h2>Cadastro de Projetos</h2>
+        <form id="admin-project-form" class="card" novalidate>
+          <label for="project-title">Título do projeto</label>
+          <input id="project-title" name="title" type="text" required>
+
+          <label for="project-desc">Descrição</label>
+          <textarea id="project-desc" name="description" rows="4" required></textarea>
+
+          <label for="project-target">Meta (R$)</label>
+          <input id="project-target" name="target" type="number" min="0" step="0.01" required>
+
+          <label for="project-status">Status</label>
+          <select id="project-status" name="status" required>
+            <option value="active">Ativo</option>
+            <option value="completed">Concluído</option>
+            <option value="pending">Pendente</option>
+          </select>
+
+          <button type="submit" class="btn btn-primary">Cadastrar Projeto</button>
+        </form>
       </section>
 
-      <section>
-        <h2>Doações</h2>
-        <div id="donations-list"></div>
+      <section class="section-card">
+        <h2>Gerenciar Projetos</h2>
+        <div id="projects-list" class="table-responsive">
+          <!-- Lista de projetos será carregada via JavaScript -->
+        </div>
       </section>
 
-      <section>
+      <section class="section-card">
+        <h2>Histórico de Doações</h2>
+        <div class="table-responsive">
+          <div id="donations-summary" class="summary-cards">
+            <div class="summary-card">
+              <h3>Total Doado</h3>
+              <p id="total-donations">R$ 0,00</p>
+            </div>
+            <div class="summary-card">
+              <h3>Doações este mês</h3>
+              <p id="month-donations">R$ 0,00</p>
+            </div>
+          </div>
+          <div id="donations-list">
+            <!-- Lista de doações será carregada via JavaScript -->
+          </div>
+        </div>
+      </section>
+
+      <section class="section-card">
         <h2>Despesas</h2>
-        <div id="expenses-list"></div>
+        <div id="expenses-list" class="table-responsive">
+          <!-- Lista de despesas será carregada via JavaScript -->
+        </div>
       </section>
 
-      <section>
+      <section class="section-card">
         <h2>Exportar / Importar dados</h2>
-        <button id="export-btn">Exportar JSON</button>
-        <input type="file" id="import-file" accept="application/json">
+        <div class="button-group">
+          <button id="export-btn" class="btn">Exportar JSON</button>
+          <div class="file-input-wrapper">
+            <label for="import-file" class="btn">Escolher arquivo</label>
+            <input type="file" id="import-file" accept="application/json">
+          </div>
+        </div>
       </section>
 
     </main>

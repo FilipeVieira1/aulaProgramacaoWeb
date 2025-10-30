@@ -1,0 +1,24 @@
+DirectoryIndex index.html
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    
+    # Se o arquivo solicitado não existe
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    
+    # Redireciona para index.html
+    RewriteRule ^(.*)$ index.html [L]
+</IfModule>
+
+# Definir tipos MIME corretamente
+AddType text/css .css
+AddType text/javascript .js
+AddType application/json .json
+
+# Habilitar CORS para desenvolvimento local
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+</IfModule>

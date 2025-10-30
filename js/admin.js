@@ -10,9 +10,113 @@
   function init(){ renderProjects(); renderDonations(); renderExpenses(); const expForm = $('expense-form'); if(expForm) expForm.addEventListener('submit', e=>{ e.preventDefault(); saveExpense(); }); const exportBtn = $('export-btn'); if(exportBtn) exportBtn.addEventListener('click', exportData); const imp = $('import-file'); if(imp) imp.addEventListener('change', importData);
   }
 
-  function renderProjects(){ const container = $('projects-list'); if(!container) return; const projects = read(KEY_PROJECTS); container.innerHTML=''; if(projects.length===0){ container.innerHTML='<p>Nenhum projeto cadastrado.</p>'; return; } projects.forEach(p=>{ const div=document.createElement('div'); div.className='section-card'; div.innerHTML=`<strong>${window.mq ? window.mq.escapeHtml(p.title) : p.title}</strong><p>${window.mq ? window.mq.escapeHtml(p.desc) : p.desc}</p><div>Meta: ${window.mq ? window.mq.formatCurrency(p.target) : p.target}</div>`; container.appendChild(div); }); }
+  function renderProjects() {
+    const container = $('projects-list');
+    if (!container) return;
+    
+    const projects = read(KEY_PROJECTS);
+    if (projects.length === 0) {
+        container.innerHTML = '<p>Nenhum projeto cadastrado.</p>';
+        return;
+    }
 
-  function renderDonations(){ const container = $('donations-list'); if(!container) return; const donations = read(KEY_DONATIONS); container.innerHTML=''; if(donations.length===0){ container.innerHTML='<p>Sem doações registradas.</p>'; return; } donations.forEach(d=>{ const div=document.createElement('div'); div.className='section-card'; div.innerHTML=`<strong>${window.mq ? window.mq.escapeHtml(d.name) : d.name}</strong> — ${window.mq ? window.mq.formatCurrency(d.amount) : d.amount}`; container.appendChild(div); }); }
+    const table = document.createElement('table');
+    table.className = 'table';
+    table.innerHTML = `
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Título</th>
+                <th>Descrição</th>
+                <th>Meta</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    `;
+
+    const tbody = table.querySelector('tbody');
+    projects.forEach(p => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${new Date(p.when || Date.now()).toLocaleDateString()}</td>
+            <td>${window.mq.escapeHtml(p.title)}</td>
+            <td>${window.mq.escapeHtml(p.desc)}</td>
+            <td>${window.mq.formatCurrency(p.target)}</td>
+            <td>${p.status || 'Ativo'}</td>
+        `;
+        tbody.appendChild(row);
+    });
+
+    container.innerHTML = '';
+    container.appendChild(table);
+}
+
+  function renderDonations() {
+    const container = $('donations-list');
+    if (!container) return;
+    
+    const donations = read(KEY_DONATIONS);
+    if (donations.length === 0) {
+        container.innerHTML = '<p>Sem doações registradas.</p>';
+        return;
+    }
+
+    // Atualiza os totais
+    updateDonationTotals(donations);
+
+    const table = document.createElement('table');
+    table.className = 'table';
+    table.innerHTML = `
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Projeto</th>
+                <th>Doador</th>
+                <th>Email</th>
+                <th>Valor</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    `;
+
+    const tbody = table.querySelector('tbody');
+    const projects = read(KEY_PROJECTS);
+
+    donations.forEach(d => {
+        const project = projects.find(p => p.id === d.projectId);
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${new Date(d.when).toLocaleDateString()}</td>
+            <td>${project ? window.mq.escapeHtml(project.title) : 'Projeto não encontrado'}</td>
+            <td>${window.mq.escapeHtml(d.name)}</td>
+            <td>${window.mq.escapeHtml(d.email || '-')}</td>
+            <td>${window.mq.formatCurrency(d.amount)}</td>
+        `;
+        tbody.appendChild(row);
+    });
+
+    container.innerHTML = '';
+    container.appendChild(table);
+}
+
+function updateDonationTotals(donations) {
+    const totalEl = $('total-donations');
+    const monthEl = $('month-donations');
+    if (!totalEl || !monthEl) return;
+
+    // Total geral
+    const total = donations.reduce((sum, d) => sum + (Number(d.amount) || 0), 0);
+    totalEl.textContent = window.mq.formatCurrency(total);
+
+    // Total do mês atual
+    const now = new Date();
+    const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+    const monthTotal = donations
+        .filter(d => new Date(d.when) >= firstDayOfMonth)
+        .reduce((sum, d) => sum + (Number(d.amount) || 0), 0);
+    monthEl.textContent = window.mq.formatCurrency(monthTotal);
+}
 
   function renderExpenses(){ const container = $('expenses-list'); if(!container) return; const expenses = read(KEY_EXPENSES); container.innerHTML=''; if(expenses.length===0){ container.innerHTML='<p>Sem despesas lançadas.</p>'; return; } expenses.forEach(x=>{ const div=document.createElement('div'); div.className='section-card'; div.innerHTML=`<strong>${window.mq ? window.mq.escapeHtml(x.title) : x.title}</strong> — ${window.mq ? window.mq.formatCurrency(x.amount) : x.amount}`; container.appendChild(div); }); }
 
