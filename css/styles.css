@@ -444,3 +444,16 @@ a:hover {
 p{margin-bottom:1rem}
 .justify{text-align:justify}
 .center{text-align:center}
+
+/* Modal genérico (MQ) */
+.mq-modal { display:none; position:fixed; inset:0; z-index:9999; align-items:center; justify-content:center; }
+.mq-modal[aria-hidden="false"] { display:flex; }
+.mq-modal-overlay { position:absolute; inset:0; background:rgba(0,0,0,0.45); }
+.mq-modal-panel { position:relative; background:#fff; border-radius:8px; width:min(680px,94%); max-width:700px; box-shadow:0 12px 30px rgba(0,0,0,0.25); padding:0; overflow:hidden; }
+.mq-modal-header { padding:1rem 1.25rem; border-bottom:1px solid #eee; background:linear-gradient(90deg,#f7faf7,#fff); }
+.mq-modal-header h2 { margin:0; font-size:1.05rem; }
+.mq-modal-body { padding:1rem 1.25rem; color:#222; line-height:1.5; }
+.mq-modal-footer { display:flex; gap:0.5rem; justify-content:flex-end; padding:0.75rem 1.25rem; border-top:1px solid #eee; background:#fafafa; }
+.mq-modal .btn { min-width:96px; }
+.mq-modal .btn-primary { background:#2b9a4a; color:white; border:0; padding:0.45rem 0.8rem; border-radius:6px; }
+.mq-modal .btn:hover { opacity:0.95; cursor:pointer; }

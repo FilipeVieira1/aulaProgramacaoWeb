@@ -32,6 +32,7 @@
     </header>
 
     <main class="container main-content">
+      <div id="admin-diagnostics" class="diagnostic-banner" style="background:#fffdf6;border-left:4px solid #2b9a4a;padding:0.6rem 1rem;margin-bottom:1rem;font-weight:600;color:#333;">Diagnóstico: carregando...</div>
       <h1>Área administrativa</h1>
 
       <section class="section-card">
@@ -98,6 +99,8 @@
             <label for="import-file" class="btn">Escolher arquivo</label>
             <input type="file" id="import-file" accept="application/json">
           </div>
+          <button id="clear-test-btn" class="btn btn-danger">Limpar dados de teste</button>
+          <button id="generate-sample-btn" class="btn btn-secondary">Gerar dados de exemplo</button>
         </div>
       </section>
 
@@ -107,8 +110,49 @@
       <p>&copy; 2025 Mãos que Acolhem</p>
     </footer>
 
+    <!-- Modal genérico (usado para alerts/confirms mais elegantes) -->
+    <div id="mq-modal" class="mq-modal" aria-hidden="true">
+      <div class="mq-modal-overlay" data-action="close"></div>
+      <div class="mq-modal-panel" role="dialog" aria-modal="true" aria-labelledby="mq-modal-title">
+        <header class="mq-modal-header">
+          <h2 id="mq-modal-title">Mensagem</h2>
+        </header>
+        <div class="mq-modal-body" id="mq-modal-body">...</div>
+        <footer class="mq-modal-footer">
+          <button id="mq-modal-cancel" class="btn">Cancelar</button>
+          <button id="mq-modal-ok" class="btn btn-primary">OK</button>
+        </footer>
+      </div>
+    </div>
+
     <script src="../js/mq-utils.js" defer></script>
     <script src="../js/menu.js" defer></script>
     <script src="../js/admin.js" defer></script>
+    <script>
+    // Banner de diagnóstico temporário — atualiza após DOMContentLoaded
+    (function(){
+      function updateDiag(){
+        try{
+          var el = document.getElementById('admin-diagnostics');
+          if(!el) return;
+          var scripts = Array.from(document.scripts).map(s=>s.src||'(inline)');
+          var hasAdmin = scripts.some(s=>/\/admin(\.js)?$/i.test(s));
+          var projects = JSON.parse(localStorage.getItem('mq_projects')||'[]');
+          var donations = JSON.parse(localStorage.getItem('mq_donations')||'[]');
+          var expenses = JSON.parse(localStorage.getItem('mq_expenses')||'[]');
+          var parts = [];
+          parts.push(hasAdmin ? 'admin.js ✅' : 'admin.js ❌');
+          parts.push('projetos: ' + (projects.length||0));
+          parts.push('doações: ' + (donations.length||0));
+          parts.push('despesas: ' + (expenses.length||0));
+          el.textContent = 'Diagnóstico — ' + parts.join(' · ');
+        }catch(err){
+          console.warn('Erro no banner de diagnóstico:', err);
+        }
+      }
+      if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', updateDiag);
+      else updateDiag();
+    })();
+    </script>
   </body>
 </html>
